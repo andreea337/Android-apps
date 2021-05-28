@@ -1,15 +1,21 @@
 package com.example.news;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
@@ -74,6 +80,51 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(arrayList);
         recyclerView.setAdapter(recyclerViewAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuItemExit:
+                finish();
+                return true;
+            case R.id.menuItemProfile:
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("App profile")
+                        .setMessage("show GoogleNews")
+                        .setCancelable(true)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                .show();
+                return true;
+            case R.id.menuItemCreater:
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("App Creater: Andreea")
+                        .setMessage("Currently a graduate student in NCTU IM")
+                        .setCancelable(true)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                        .show();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
